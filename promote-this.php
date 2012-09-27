@@ -53,13 +53,17 @@ function promote_this_add_custom_box() {
         'myplugin_sectionid',
         __( 'Promote This', 'myplugin_textdomain' ),
         'promote_this_inner_custom_box',
-        'post'
+        'post',
+        'normal',
+        'high'
     );
     add_meta_box(
         'myplugin_sectionid',
         __( 'Promote This', 'myplugin_textdomain' ),
         'promote_this_inner_custom_box',
-        'page'
+        'page',
+        'normal',
+        'high'
     );
 }
 
