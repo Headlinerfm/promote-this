@@ -13,7 +13,6 @@ Author URI: http://headliner.fm/
 */
 function add_promo_script(){
 
-
 	wp_enqueue_script('promo', plugins_url('promo.js', __FILE__), array('jquery'), '0.1', true);
 }
 
