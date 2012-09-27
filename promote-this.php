@@ -26,16 +26,21 @@ add_action( 'admin_enqueue_scripts', 'add_promo_script' );
 
 add_action('post_row_actions', 'promote_this_row_action', 10, 2);
 
-function promote_this_row_action($actions,$post){
-	$link = get_permalink( $post->ID);
-	$excerpt = get_the_title($post->ID);
-	$str="";
-	if(strlen($excerpt)>=5){
-		$str=$excerpt . " " . $link;
-	}else{
-		$str=$link;
-	}
 
+function get_promo_str($post){
+  $link = get_permalink( $post->ID);
+  $title = get_the_title($post->ID);
+  $str="";
+  if(strlen($title)>=5){
+    $str=$title . " " . $link;
+  }else{
+    $str=$link;
+  }
+  return $str;
+}
+
+function promote_this_row_action($actions,$post){
+  $str=get_promo_str($post);
 	$actions['promote_this'] = '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote this</a>';
 	return $actions;
 }
@@ -63,13 +68,8 @@ function promote_this_inner_custom_box( $post ) {
 
   // Use nonce for verification
   wp_nonce_field( plugin_basename( __FILE__ ), 'promote_this_noncename' );
-
+  $str=get_promo_str($post);
   // The actual fields for data entry
-  echo '<label for="myplugin_new_field">';
-       _e("Description for this field", 'myplugin_textdomain' );
-  echo '</label> ';
-  echo '<input type="text" id="myplugin_new_field" name="myplugin_new_field" value="whatever" size="25" />';
-}
-
+  echo '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote This</a>'
 
 ?>
