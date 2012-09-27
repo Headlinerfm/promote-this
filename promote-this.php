@@ -41,7 +41,7 @@ function get_promo_str($post){
 
 function promote_this_row_action($actions,$post){
   $str=get_promo_str($post);
-	$actions['promote_this'] = '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote this</a>';
+	$actions['promote_this'] = '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this" data-message="' . urlencode($str) .'">Promote this</a>';
 	return $actions;
 }
 
@@ -69,6 +69,6 @@ function promote_this_inner_custom_box( $post ) {
   wp_nonce_field( plugin_basename( __FILE__ ), 'promote_this_noncename' );
   $str=get_promo_str($post);
   // The actual fields for data entry
-  echo '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote This</a>';
+  echo '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this" data-message="' . urlencode($str) .'">Promote This</a>';
 }
 ?>
