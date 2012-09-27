@@ -54,7 +54,7 @@ function promote_this_add_custom_box() {
         __( 'Promote This', 'myplugin_textdomain' ),
         'promote_this_inner_custom_box',
         'post',
-        'normal',
+        'side',
         'high'
     );
     add_meta_box(
@@ -62,7 +62,7 @@ function promote_this_add_custom_box() {
         __( 'Promote This', 'myplugin_textdomain' ),
         'promote_this_inner_custom_box',
         'page',
-        'normal',
+        'side',
         'high'
     );
 }
