@@ -86,7 +86,7 @@ function promote_this_inner_custom_box( $post ) {
 //   add_action('admin_notices', 'display_promote_notice',10, 2);
 // }
 
-function codex_book_updated_messages( $messages ) {
+function codex_promo_post_updated_messages( $messages ) {
   global $post, $post_ID;
 
   $promo_str = get_promo_str($post);
@@ -99,7 +99,7 @@ function codex_book_updated_messages( $messages ) {
     4 => __('Post updated.'),
     /* translators: %s: date and time of the revision */
     5 => isset($_GET['revision']) ? sprintf( __('Post restored to revision from %s'), wp_post_revision_title( (int) $_GET['revision'], false ) ) : false,
-    6 => sprintf( __('Post published. <a href="%1$s">View post</a> <a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="$2%s">Promote This</a>'), esc_url( get_permalink($post_ID) ),esc_url($promo_str) ),
+    6 => sprintf( __('Post published. <a href="%1$s">View post</a> | <a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="$2%s">Promote This</a>'), esc_url( get_permalink($post_ID) ),esc_url($promo_str) ),
     7 => __('Post saved.'),
     8 => sprintf( __('Post submitted. <a target="_blank" href="%s">Preview post</a>'), esc_url( add_query_arg( 'preview', 'true', get_permalink($post_ID) ) ) ),
     9 => sprintf( __('Post scheduled for: <strong>%1$s</strong>. <a target="_blank" href="%2$s">Preview post</a>'),
@@ -110,12 +110,6 @@ function codex_book_updated_messages( $messages ) {
 
   return $messages;
 }
-add_filter( 'post_updated_messages', 'codex_book_updated_messages' );
+add_filter( 'post_updated_messages', 'codex_promo_post_updated_messages' );
 
-
-function display_promote_notice($postID,$post){
-  echo '<div class="updated">
-       <p>You should promote this post</p>
-    </div>';
-}
 ?>
