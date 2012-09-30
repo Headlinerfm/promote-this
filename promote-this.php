@@ -14,19 +14,16 @@ Author URI: http://headliner.fm/
 
 defined('ABSPATH') or die('You\'re not supposed to be here.');
 
+//adding the promo.js script only the the admin interface
 function add_promo_script(){
-
 	wp_enqueue_script('promo', plugins_url('promo.js', __FILE__), array('jquery'), '0.1', true);
 }
-
 if ( is_admin() ) {
 add_action( 'admin_enqueue_scripts', 'add_promo_script' );
 }
 
 
-add_action('post_row_actions', 'promote_this_row_action', 10, 2);
-
-
+// a wee little function that helps construct our default promo message
 function get_promo_str($post){
   $link = get_permalink( $post->ID);
   $title = get_the_title($post->ID);
@@ -39,15 +36,20 @@ function get_promo_str($post){
   return $str;
 }
 
+// adding a row action to the posts columnar view
+add_action('post_row_actions', 'promote_this_row_action', 10, 2);
 function promote_this_row_action($actions,$post){
   $str=get_promo_str($post);
 	$actions['promote_this'] = '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote this</a>';
 	return $actions;
 }
 
+// adding a row action to the pages columnar view
+add_action('page_row_actions', 'promote_this_row_action', 10, 2);
 
+
+// adding the metabox
 add_action( 'add_meta_boxes', 'promote_this_add_custom_box' );
-
 function promote_this_add_custom_box() {
     add_meta_box(
         'myplugin_sectionid',
@@ -67,7 +69,7 @@ function promote_this_add_custom_box() {
     );
 }
 
-
+//the text for the custom metabox
 function promote_this_inner_custom_box( $post ) {
   // Use nonce for verification
   //wp_nonce_field( plugin_basename( __FILE__ ), 'promote_this_noncename' );
@@ -76,16 +78,8 @@ function promote_this_inner_custom_box( $post ) {
   echo '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote This</a>';
 }
 
-// add_action('pending_to_publish',  'load_promote_notice_on_publish',10, 2);
-// add_action('new_to_publish',      'load_promote_notice_on_publish', 10, 2);
-// add_action('draft_to_publish',    'load_promote_notice_on_publish', 10, 2);
-// add_action('pending_to_publish',  'load_promote_notice_on_publish', 10, 2);
-// add_action('future_to_publish',   'load_promote_notice_on_publish', 10, 2);
 
-// function load_promote_notice_on_publish($postID,$post){
-//   add_action('admin_notices', 'display_promote_notice',10, 2);
-// }
-
+// adding a message to the admin notice section for a published post.
 function codex_promo_post_updated_messages( $messages ) {
   global $post, $post_ID;
   $promo_str = get_promo_str($post);
