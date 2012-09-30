@@ -76,13 +76,18 @@ function promote_this_inner_custom_box( $post ) {
   echo '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote This</a>';
 }
 
-//add_action('pending_to_publish','load_promote_notice_on_publish');
+add_action('pending_to_publish',  'load_promote_notice_on_publish',10, 2);
 
-//function load_promote_notice_on_publish(){
-  add_action('admin_notices', 'display_promote_notice');
-//}
+add_action('new_to_publish',      'load_promote_notice_on_publish', 10, 2);
+add_action('draft_to_publish',    'load_promote_notice_on_publish', 10, 2);
+add_action('pending_to_publish',  'load_promote_notice_on_publish', 10, 2);
+add_action('future_to_publish',   'load_promote_notice_on_publish', 10, 2);
 
-function display_promote_notice($post){
+function load_promote_notice_on_publish($postID,$post){
+  add_action('admin_notices', 'display_promote_notice',10, 2);
+}
+
+function display_promote_notice($postID,$post){
   echo '<div class="updated">
        <p>You should promote this post</p>
     </div>';
