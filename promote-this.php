@@ -25,9 +25,9 @@ add_action( 'admin_enqueue_scripts', 'add_promo_script' );
 
 // a wee little function that helps construct our default promo message
 function get_promo_str($post){
-  $link = get_permalink( $post->ID);
-  $title = get_the_title($post->ID);
-  $str="";
+  $link   = get_permalink($post->ID);
+  $title  = get_the_title($post->ID);
+  $str    = "";
   if(strlen($title)>=5){
     $str=$title . " " . $link;
   }else{
@@ -40,7 +40,7 @@ function get_promo_str($post){
 add_action('post_row_actions', 'promote_this_row_action', 10, 2);
 function promote_this_row_action($actions,$post){
   $str=get_promo_str($post);
-	$actions['promote_this'] = '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote this</a>';
+	$actions['promote_this'] = '<a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote this</a>';
 	return $actions;
 }
 
@@ -75,7 +75,7 @@ function promote_this_inner_custom_box( $post ) {
   //wp_nonce_field( plugin_basename( __FILE__ ), 'promote_this_noncename' );
   $str=get_promo_str($post);
   // The actual fields for data entry
-  echo '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote This</a>';
+  echo '<a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote This</a>';
 }
 
 
@@ -83,7 +83,7 @@ function promote_this_inner_custom_box( $post ) {
 function codex_promo_post_updated_messages( $messages ) {
   global $post, $post_ID;
   $promo_str = get_promo_str($post);
-  $messages['post'][6] = sprintf( __('Post published. <a href="%1$s">View post</a> | <a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="$2%s">Promote This post</a>'), esc_url( get_permalink($post_ID) ),esc_url($promo_str) );
+  $messages['post'][6] = sprintf( __('Post published. <a href="%1$s">View post</a> | <a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="$2%s">Promote This post</a>'), esc_url( get_permalink($post_ID) ),esc_url($promo_str) );
   return $messages;
 }
 add_filter( 'post_updated_messages', 'codex_promo_post_updated_messages' );
