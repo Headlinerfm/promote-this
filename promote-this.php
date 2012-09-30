@@ -75,4 +75,14 @@ function promote_this_inner_custom_box( $post ) {
   // The actual fields for data entry
   echo '<a href="http:\/\/headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote This</a>';
 }
+
+add_action('pending_to_publish','load_promote_notice_on_publish')
+function load_promote_notice_on_publish(){
+  add_action('admin_notices', 'display_promote_notice');
+};
+function display_promote_notice($post){
+echo '<div class="updated">
+       <p>You should promote this post</p>
+    </div>';
+}
 ?>
