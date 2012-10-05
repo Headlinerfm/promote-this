@@ -39,8 +39,10 @@ function get_promo_str($post){
 // adding a row action to the posts columnar view
 add_action('post_row_actions', 'promote_this_row_action', 10, 2);
 function promote_this_row_action($actions,$post){
-  $str=get_promo_str($post);
-	$actions['promote_this'] = '<a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote this</a>';
+  if ($post->post_status=="publish") {
+    $str=get_promo_str($post);
+	  $actions['promote_this'] = '<a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote this</a>';
+  }
 	return $actions;
 }
 
@@ -49,24 +51,26 @@ add_action('page_row_actions', 'promote_this_row_action', 10, 2);
 
 
 // adding the metabox
-add_action( 'add_meta_boxes', 'promote_this_add_custom_box' );
-function promote_this_add_custom_box() {
-    add_meta_box(
+add_action( 'add_meta_boxes', 'promote_this_add_custom_box',10 ,2 );
+function promote_this_add_custom_box($post_ID,$post) {
+    if ($post->post_status=="publish") {
+      add_meta_box(
         'myplugin_sectionid',
         __( 'Promote This', 'myplugin_textdomain' ),
         'promote_this_inner_custom_box',
         'post',
         'side',
         'high'
-    );
-    add_meta_box(
+      );
+      add_meta_box(
         'myplugin_sectionid',
         __( 'Promote This', 'myplugin_textdomain' ),
         'promote_this_inner_custom_box',
         'page',
         'side',
         'high'
-    );
+      );
+    }
 }
 
 //the text for the custom metabox
