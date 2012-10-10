@@ -6,7 +6,7 @@
 /*
 Plugin Name: Promote This
 Plugin URI: http://headliner.fm
-Description: simple plugin for Headliner.fm
+Description: Allows you to easily promote your posts to a new audience with Headliner.fm
 Author: Bill Cromie
 Version: 0.1
 Author URI: http://headliner.fm/
@@ -41,7 +41,7 @@ add_action('post_row_actions', 'promote_this_row_action', 10, 2);
 function promote_this_row_action($actions,$post){
   if ($post->post_status=="publish") {
     $str=get_promo_str($post);
-	  $actions['promote_this'] = '<a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote this</a>';
+	  $actions['promote_this'] = '<a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button" data-message="' . urlencode($str) .'">Promote This</a>';
   }
 	return $actions;
 }
@@ -79,8 +79,8 @@ function promote_this_inner_custom_box( $post ) {
   //wp_nonce_field( plugin_basename( __FILE__ ), 'promote_this_noncename' );
   $str=get_promo_str($post);
   // The actual fields for data entry
-  echo 'Get recommended to a new audience on Facebook and Twitter, free.
-  <a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button button-primary" data-message="' . urlencode($str) .'">Promote This</a>';
+  echo '<div>Get recommended to a new audience on Facebook and Twitter, free.</div>
+  <div style="padding:10px; float:right;"><a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button button-primary" data-message="' . urlencode($str) .'">Promote This</a></div><div style="clear:both"></div>';
 }
 
 
