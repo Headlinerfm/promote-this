@@ -82,8 +82,6 @@ function promote_this_inner_custom_box( $post ) {
 echo '
 <div id="minor-publishing">
   <div id="minor-publishing-actions">Get recommended to a new audience on Facebook and Twitter, free.</div>
-</div>
-<div id="major-publishing-actions">
   <div id="publishing-action">
     <a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button button-primary" data-message="' . urlencode($str) .'">Promote This</a>
   </div>
