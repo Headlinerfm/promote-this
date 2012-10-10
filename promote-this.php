@@ -79,7 +79,7 @@ function promote_this_inner_custom_box( $post ) {
   //wp_nonce_field( plugin_basename( __FILE__ ), 'promote_this_noncename' );
   $str=get_promo_str($post);
   // The actual fields for data entry
-  echo 'Get recommended to a new audience on Facebook and Twitter, free.<br>
+  echo '<div>Get recommended to a new audience on Facebook and Twitter, free.</div>
   <div id="publishing_action">
     <a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button button-primary" data-message="' . urlencode($str) .'">Promote This</a>
   </div>
