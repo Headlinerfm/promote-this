@@ -80,7 +80,9 @@ function promote_this_inner_custom_box( $post ) {
   $str=get_promo_str($post);
   // The actual fields for data entry
   echo 'Get recommended to a new audience on Facebook and Twitter, free.<br>
-  <a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button button-primary" data-message="' . urlencode($str) .'">Promote This</a>
+  <div id="publishing_action">
+    <a href="http://headliner.fm/exchange/promote_this" target="_blank" class="hl_promote_this_button button-primary" data-message="' . urlencode($str) .'">Promote This</a>
+  </div>
   ';
 }
 
