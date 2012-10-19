@@ -16,7 +16,7 @@ defined('ABSPATH') or die('You\'re not supposed to be here.');
 
 //adding the promo.js script only the the admin interface
 function add_promo_script(){
-	wp_enqueue_script('promo', plugins_url('promo.js', __FILE__), array('jquery'), '0.1', true);
+	wp_enqueue_script('promo', plugins_url('promote_this_widget.min.js', __FILE__), array('jquery'), '0.1', true);
 }
 if ( is_admin() ) {
 add_action( 'admin_enqueue_scripts', 'add_promo_script' );
